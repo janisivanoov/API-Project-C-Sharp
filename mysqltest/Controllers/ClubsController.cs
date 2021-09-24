@@ -31,14 +31,10 @@ namespace ClubsCore.Controllers
                                      .AsQueryable(); //ordering all clubs by Id
             //Applying filters:
             if (queryParameters.Name != null)
-            {
                 clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name));
-            }
 
             if (queryParameters.Type != null)
-            {
                 clubsQuery = clubsQuery.Where(t => t.Type == queryParameters.Type);
-            }
 
             var clubs = Paginate<ClubDTO>(clubsQuery, queryParameters); //using Paginate
 

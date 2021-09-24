@@ -32,14 +32,10 @@ namespace ClubsCore.Controllers
 
             //Applying filters:
             if (queryparameters.BirthDate != null)
-            {
                 studentsQuery = studentsQuery.Where(d => d.BirthDate == queryparameters.BirthDate);
-            }
 
             if (queryparameters.Name != null)
-            {
                 studentsQuery = studentsQuery.Where(n => n.FirstName == queryparameters.Name);
-            }
 
             var students = Paginate<StudentDTO>(studentsQuery, queryparameters); //using Paginate
 
