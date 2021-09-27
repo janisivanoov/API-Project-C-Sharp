@@ -45,7 +45,7 @@ namespace ClubsCore.Controllers
         /// Get Club By Id
         /// </summary>
         [HttpGet("{id}")]
-        public ActionResult GetClub(int id, string name)
+        public ActionResult GetClub(int id)
         {
             var club = _context.Clubs
                                .Where(x => x.Id == id) //searching for Club using Id

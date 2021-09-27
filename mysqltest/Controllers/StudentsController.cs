@@ -34,8 +34,11 @@ namespace ClubsCore.Controllers
             if (queryparameters.BirthDate != null)
                 studentsQuery = studentsQuery.Where(d => d.BirthDate == queryparameters.BirthDate); //Checking if the entered BirthDate is in the context if BithDate entered
 
-            if (queryparameters.Name != null)
-                studentsQuery = studentsQuery.Where(n => n.FirstName == queryparameters.Name); //Checking if the entered Name is in the context if name entered
+            if (queryparameters.FirstName != null)
+                studentsQuery = studentsQuery.Where(n => n.FirstName == queryparameters.FirstName); //Checking if the entered FirstName is in the context if FirstName entered
+
+            if (queryparameters.LastName != null)
+                studentsQuery = studentsQuery.Where(l => l.LastName == queryparameters.LastName); //Checking if the entered LastName is in the context if LastName entered
 
             var students = Paginate<StudentDTO>(studentsQuery, queryparameters); //using Paginate with Parameters we have alredy set
 
@@ -46,7 +49,7 @@ namespace ClubsCore.Controllers
         /// Get Student By Id
         /// </summary>
         [HttpGet("{id}")]
-        public ActionResult GetStudent(int id, string name)
+        public ActionResult GetStudent(int id)
         {
             var student = _context.Students
                                .Where(x => x.Id == id) //searching for Student using Id
