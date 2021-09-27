@@ -21,7 +21,7 @@ namespace ClubsCore.Controllers
         }
 
         /// <summary>
-        /// GetAll
+        /// GetAll Students With Filters
         /// </summary>
         [HttpGet]
         public ActionResult GetStudents([FromQuery] QueryStudentParameters queryparameters)
@@ -43,7 +43,7 @@ namespace ClubsCore.Controllers
         }
 
         /// <summary>
-        /// Get_By_Id
+        /// Get Student By Id
         /// </summary>
         [HttpGet("{id}")]
         public ActionResult GetStudent(int id, string name)
@@ -60,7 +60,7 @@ namespace ClubsCore.Controllers
         }
 
         /// <summary>
-        /// Post
+        /// Post Student
         /// </summary>
         [HttpPost]
         public async Task<ActionResult> PostStudentAsync(Student studentPost)
@@ -73,7 +73,7 @@ namespace ClubsCore.Controllers
         }
 
         /// <summary>
-        /// Delete
+        /// Delete Student
         /// </summary>
         [HttpDelete("{id}")]
         public async Task<ActionResult<Student>> DeleteStudent(int id)
@@ -90,7 +90,7 @@ namespace ClubsCore.Controllers
         }
 
         /// <summary>
-        /// Patch
+        /// Patch the Student
         /// </summary>
         [HttpPatch("{id}")]
         public ActionResult Patch(int id, [FromBody] JsonPatchDocument<Student> value)
