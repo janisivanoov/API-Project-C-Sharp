@@ -10,8 +10,9 @@ namespace mysqltest.Mapping
         {
             CreateMap<Student, StudentDTO>()
                              .ForMember(dest => dest.ClubCount,
-                                        opt => opt.MapFrom(
-                                        src => src.Clubs.Count));
+                                        opt => opt.MapFrom(src => src.Clubs.Count));
+
+            CreateMap<Student, StudentListingDTO>();
         }
     }
 }

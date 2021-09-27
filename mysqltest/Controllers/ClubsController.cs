@@ -27,8 +27,8 @@ namespace ClubsCore.Controllers
         public ActionResult GetClubs([FromQuery] QueryClubParameters queryParameters)
         {
             var clubsQuery = _context.Clubs
-                                     .OrderBy(c => c.Id)
-                                     .AsQueryable(); //ordering all clubs by Id
+                                     .OrderBy(c => c.Id) //ordering all clubs by Id
+                                     .AsQueryable();
             //Applying filters:
             if (queryParameters.Name != null)
                 clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the student Name in context if entered
@@ -68,6 +68,7 @@ namespace ClubsCore.Controllers
                                     .Add(clubPost); //using Add function to post a club
 
             await _context.SaveChangesAsync(); //saving edit in a database
+
             return CreatedAtRoute("Post", new { Id = clubPost.Id }, clubPost);
         }
 
@@ -83,6 +84,7 @@ namespace ClubsCore.Controllers
                 return NotFound();
 
             _context.Clubs.Remove(club); //using Remove function
+
             await _context.SaveChangesAsync(); //saving all in database
 
             return club;

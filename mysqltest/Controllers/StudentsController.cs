@@ -72,6 +72,7 @@ namespace ClubsCore.Controllers
                                     .Add(studentPost); //using Add function to post a student
 
             await _context.SaveChangesAsync(); //saving edit in a database
+
             return CreatedAtRoute("Post", new { Id = studentPost.Id }, studentPost);
         }
 
@@ -87,6 +88,7 @@ namespace ClubsCore.Controllers
                 return NotFound();
 
             _context.Students.Remove(student); //using Remove function
+
             await _context.SaveChangesAsync(); //saving all in database
 
             return student;
