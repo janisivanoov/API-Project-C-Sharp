@@ -31,12 +31,12 @@ namespace ClubsCore.Controllers
                                      .AsQueryable(); //ordering all clubs by Id
             //Applying filters:
             if (queryParameters.Name != null)
-                clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name));
+                clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the student Name in context if entered
 
             if (queryParameters.Type != null)
-                clubsQuery = clubsQuery.Where(t => t.Type == queryParameters.Type);
+                clubsQuery = clubsQuery.Where(x => x.Type.Contains(x.Type)); //Checking if the entered Type is in the enum list if type entered
 
-            var clubs = Paginate<ClubDTO>(clubsQuery, queryParameters); //using Paginate
+            var clubs = Paginate<ClubDTO>(clubsQuery, queryParameters); //using Paginate with Parameters we have already set
 
             return Ok(clubs);
         }

@@ -8,7 +8,10 @@ namespace mysqltest.Mapping
     {
         public StudentProfile()
         {
-            CreateMap<Student, StudentDTO>();
+            CreateMap<Student, StudentDTO>()
+                             .ForMember(dest => dest.ClubCount,
+                                        opt => opt.MapFrom(
+                                        src => src.Clubs.Count));
         }
     }
 }

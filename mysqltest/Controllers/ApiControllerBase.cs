@@ -22,7 +22,7 @@ namespace mysqltest.Controllers
         }
 
         /// <summary>
-        ///
+        /// Pagination
         /// </summary>
         /// <typeparam name="TDto"></typeparam>
         /// <param name="query"></param>
