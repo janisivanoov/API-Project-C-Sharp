@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using mysqltest.Enum;
 using System;
 
 namespace mysqltest.Models
@@ -13,10 +14,10 @@ namespace mysqltest.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Club>().HasData(
-                new Club() { Id = 1, Name = "International", Type = "Other", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-                new Club() { Id = 2, Name = "Math", Type = "Academic", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-                new Club() { Id = 3, Name = "Diving", Type = "Sport", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-                new Club() { Id = 4, Name = "Strollers", Type = "Leisure", CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
+                new Club() { Id = 1, Name = "International", Type = ClubType.Other, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Club() { Id = 2, Name = "Math", Type = ClubType.Academic, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Club() { Id = 3, Name = "Diving", Type = ClubType.Sport, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Club() { Id = 4, Name = "Strollers", Type = ClubType.Leisure, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
 
             modelBuilder.Entity<Student>().HasData(
           new Student() { Id = 1, FirstName = "Ali", LastName = "Tayari", BirthDate = new DateTime(1999, 8, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },

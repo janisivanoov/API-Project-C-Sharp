@@ -2,8 +2,12 @@
 {
     public enum ClubType
     {
-        Academic,
-        Sport,
-        Other
+        Academic = 1,
+
+        Sport = 2,
+
+        Other = 3,
+
+        Leisure = 4
     }
 }

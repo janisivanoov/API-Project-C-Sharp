@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using mysqltest.Enum;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace mysqltest.Models
@@ -10,7 +11,7 @@ namespace mysqltest.Models
         [Required]
         public string Name { get; set; }
 
-        public string Type { get; set; }
+        public ClubType Type { get; set; }
 
         public ICollection<StudentClub> Students { get; set; }
     }

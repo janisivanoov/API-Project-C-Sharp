@@ -33,8 +33,14 @@ namespace ClubsCore.Controllers
             if (queryParameters.Name != null)
                 clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the student Name in context if entered
 
+            //TODO !
+            //TODO !
+            //TODO !
+            //TODO !
+            /*
             if (queryParameters.Type != null)
-                clubsQuery = clubsQuery.Where(x => x.Type.Contains(x.Type)); //Checking if the entered Type is in the enum list if type entered
+                clubsQuery = clubsQuery.Where(t => t.Type .Contains(queryParameters.Type)); //Checking if the entered Type is in the enum list if type entered(PROBLEM HERE!!!)
+            */
 
             var clubs = Paginate<ClubDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
 
