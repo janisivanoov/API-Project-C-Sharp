@@ -1,4 +1,4 @@
-﻿namespace mysqltest.Filters
+﻿namespace mysqltest.Enum
 {
     public enum ClubType
     {

@@ -1,4 +1,4 @@
-﻿using mysqltest.Filters;
+﻿using mysqltest.Enum;
 using System.Collections.Generic;
 
 namespace mysqltest.Paging

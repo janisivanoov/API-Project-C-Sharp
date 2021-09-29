@@ -53,7 +53,7 @@ namespace ClubsCore.Controllers
         {
             var student = _context.Students
                                .Where(x => x.Id == id) //searching for Student using Id
-                               .ProjectTo<StudentDTO>(_mapper.ConfigurationProvider)//using mapper and StudentDTO
+                               .ProjectTo<StudentDTO>(_mapper.ConfigurationProvider) //using mapper and StudentDTO
                                .FirstOrDefault(); //Selecting the club by Id with StudentDTO parameters or make it as a default
 
             if (student == null)
