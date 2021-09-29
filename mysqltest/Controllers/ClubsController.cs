@@ -28,7 +28,7 @@ namespace ClubsCore.Controllers
         {
             var clubsQuery = _context.Clubs
                                      .OrderBy(c => c.Id) //ordering all clubs by Id
-                                     .AsQueryable();
+                                     .AsQueryable(); //To apply filters
             //Applying filters:
             if (queryParameters.Name != null)
                 clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the student Name in context if entered
@@ -36,7 +36,7 @@ namespace ClubsCore.Controllers
             if (queryParameters.Type != null)
                 clubsQuery = clubsQuery.Where(x => x.Type.Contains(x.Type)); //Checking if the entered Type is in the enum list if type entered
 
-            var clubs = Paginate<ClubDTO>(clubsQuery, queryParameters); //using Paginate with Parameters we have already set
+            var clubs = Paginate<ClubDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
 
             return Ok(clubs);
         }

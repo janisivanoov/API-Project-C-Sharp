@@ -28,7 +28,7 @@ namespace ClubsCore.Controllers
         {
             var studentsQuery = _context.Students
                                      .OrderBy(c => c.Id) //ordering all students by Id
-                                     .AsQueryable();
+                                     .AsQueryable(); //To apply filters
 
             //Applying filters:
             if (queryparameters.BirthDate != null)
