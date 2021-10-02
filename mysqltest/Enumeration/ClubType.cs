@@ -1,6 +1,6 @@
-﻿namespace mysqltest.Enum
+﻿namespace mysqltest.Enums
 {
-    public enum ClubType
+    public enum ClubType : int
     {
         Academic = 1,
 

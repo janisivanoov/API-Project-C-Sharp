@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using mysqltest.Enums;
 using mysqltest.Mapping.DTO;
 using mysqltest.Models;
+using System;
 
 namespace mysqltest.Mapping
 {
@@ -11,8 +13,9 @@ namespace mysqltest.Mapping
             CreateMap<Club, ClubDTO>()
                 .ForMember(dest => dest.StudentCount,
                            opt => opt.MapFrom(src => src.Students.Count));
+            //.ForMember(o => o.ClubType, ex => ex.MapFrom(o => Enum.Parse(typeof(ClubType), o.ClubType)));
 
-            CreateMap<Club, ClubListingDTO>();
+            CreateMap<ClubListingDTO, Club>().ForMember(o => o.Type, ex => ex.MapFrom(o => Enum.Parse(typeof(ClubType), o.ClubType)));
         }
     }
 }

@@ -8,6 +8,7 @@ using mysqltest.Mapping.DTO;
 using mysqltest.Models;
 using mysqltest.Paging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,14 +34,8 @@ namespace ClubsCore.Controllers
             if (queryParameters.Name != null)
                 clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the student Name in context if entered
 
-            //TODO !
-            //TODO !
-            //TODO !
-            //TODO !
-            /*
             if (queryParameters.Type != null)
-                clubsQuery = clubsQuery.Where(t => t.Type .Contains(queryParameters.Type)); //Checking if the entered Type is in the enum list if type entered(PROBLEM HERE!!!)
-            */
+                return Ok(_mapper.Map<IEnumerable<Club>, IEnumerable<ClubTypeResponse>>(clubsQuery));
 
             var clubs = Paginate<ClubDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
 

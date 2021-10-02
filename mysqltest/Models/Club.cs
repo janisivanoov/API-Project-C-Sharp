@@ -1,4 +1,4 @@
-﻿using mysqltest.Enum;
+﻿using mysqltest.Enums;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 

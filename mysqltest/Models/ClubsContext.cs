@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using mysqltest.Enum;
+using mysqltest.Enums;
 using System;
 
 namespace mysqltest.Models
