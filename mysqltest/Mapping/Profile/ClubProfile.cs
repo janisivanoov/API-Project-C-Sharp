@@ -14,6 +14,8 @@ namespace mysqltest.Mapping
                 .ForMember(dest => dest.StudentCount,
                            opt => opt.MapFrom(src => src.Students.Count));
 
+            CreateMap<Club, ClubTmpDTO>();
+
             CreateMap<ClubListingDTO, Club>()
                 .ForMember(o => o.Type
                           , ex => ex.MapFrom(o => Enum.Parse(typeof(ClubType), o.ClubType)));

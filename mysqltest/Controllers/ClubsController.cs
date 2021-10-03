@@ -8,7 +8,6 @@ using mysqltest.Mapping.DTO;
 using mysqltest.Models;
 using mysqltest.Paging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -35,9 +34,9 @@ namespace ClubsCore.Controllers
                 clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the student Name in context if entered
 
             if (queryParameters.Type != null)
-                return Ok(_mapper.Map<IEnumerable<Club>, IEnumerable<ClubTypeResponse>>(clubsQuery)); //????? can't convert int to string
+                clubsQuery = clubsQuery.Where(x => queryParameters.Type.Contains(x.Type));
 
-            var clubs = Paginate<ClubListingDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
+            var clubs = Paginate<ClubTmpDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
 
             return Ok(clubs);
         }

@@ -4,9 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using mysqltest.Core.Providers;
 using mysqltest.Mapping;
 using mysqltest.Models;
+using mysqltest.Models.Helpers;
 using System;
+using System.Text.Json.Serialization;
 
 namespace mysqltest
 {
@@ -33,15 +36,25 @@ namespace mysqltest
             );
 
             services.AddSingleton(sp => MapperInitializer.GetMapper());
-            services.AddControllers();
+            services.AddControllers(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new EnumEntityBinderProvider());
+            }).AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
             services.AddSwaggerGen();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ClubsContext clubsContext)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //clubsContext.Database.EnsureDeleted();
+                clubsContext.Database.EnsureCreated();
+                DatabaseInitializer.InitializeIfNeeded(clubsContext);
             }
 
             app.UseSwagger(c =>
