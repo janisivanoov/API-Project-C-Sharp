@@ -49,5 +49,6 @@ namespace mysqltest.Models
         public DbSet<Club> Clubs { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentClub> StudentClubs { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

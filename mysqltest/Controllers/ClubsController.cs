@@ -35,9 +35,9 @@ namespace ClubsCore.Controllers
                 clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the student Name in context if entered
 
             if (queryParameters.Type != null)
-                return Ok(_mapper.Map<IEnumerable<Club>, IEnumerable<ClubTypeResponse>>(clubsQuery));
+                return Ok(_mapper.Map<IEnumerable<Club>, IEnumerable<ClubTypeResponse>>(clubsQuery)); //????? can't convert int to string
 
-            var clubs = Paginate<ClubDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
+            var clubs = Paginate<ClubListingDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
 
             return Ok(clubs);
         }
