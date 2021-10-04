@@ -14,8 +14,15 @@ namespace mysqltest.Models.Helpers
             InsertClubs(context);
             InsertStudents(context);
             InsertStudentClubs(context);
+            InsertLoginUp(context);
 
             context.SaveChanges();
+        }
+
+        private static void InsertLoginUp(ClubsContext context)
+        {
+            context.Add(new User() { FirstName = "Ali", LastName = "Tayari", Id = 1, PasswordHash = "12345", Username = "tester", Password = "12345" });
+            context.Add(new User() { FirstName = "Ivan", LastName = "Ivanov", Id = 2, PasswordHash = "12345", Username = "ivan", Password = "12345" });
         }
 
         private static void InsertStudentClubs(ClubsContext context)

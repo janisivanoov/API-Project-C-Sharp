@@ -31,8 +31,6 @@ namespace ClubsCore.Controllers
                                      .AsQueryable(); //To apply filters
 
             //Applying filters:
-            if (queryparameters.BirthDate != null)
-                studentsQuery = studentsQuery.Where(d => d.BirthDate == queryparameters.BirthDate); //Checking if the entered BirthDate is in the context if BithDate entered
 
             if (queryparameters.FirstName != null)
                 studentsQuery = studentsQuery.Where(n => n.FirstName == queryparameters.FirstName); //Checking if the entered FirstName is in the context if FirstName entered

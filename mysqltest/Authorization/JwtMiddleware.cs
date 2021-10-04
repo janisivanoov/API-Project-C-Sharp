@@ -18,7 +18,7 @@ namespace WebApi.Authorization
             _appSettings = appSettings.Value;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService, IJwtUtils jwtUtils)
+        public async Task Invoke(HttpContext context, IStudentService userService, IJwtUtils jwtUtils)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
             var userId = jwtUtils.ValidateToken(token);

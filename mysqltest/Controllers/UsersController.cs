@@ -13,12 +13,12 @@ namespace mysqltest.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private IUserService _userService;
+        private IStudentService _userService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
 
         public UsersController(
-            IUserService userService,
+            IStudentService userService,
             IMapper mapper,
             IOptions<AppSettings> appSettings)
         {

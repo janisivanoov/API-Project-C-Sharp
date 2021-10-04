@@ -1,9 +1,8 @@
-using AutoMapper;
+/*using AutoMapper;
 using mysqltest.Helpers;
 using mysqltest.Models;
 using mysqltest.Models.Users;
 using System.Collections.Generic;
-using System.Linq;
 using WebApi.Authorization;
 using BCryptNet = BCrypt.Net.BCrypt;
 
@@ -13,7 +12,7 @@ namespace mysqltest.Services
     {
         AuthenticateResponse Authenticate(AuthenticateRequest model);
 
-        IEnumerable<User> GetAll();
+        IEnumerable<Student> GetAll();
 
         User GetById(int id);
 
@@ -24,13 +23,13 @@ namespace mysqltest.Services
         void Delete(int id);
     }
 
-    public class UserService : IStudentService
+    public class StudentService : IStudentService
     {
         private ClubsContext _context;
         private IJwtUtils _jwtUtils;
         private readonly IMapper _mapper;
 
-        public UserService(
+        public StudentService(
             ClubsContext context,
             IJwtUtils jwtUtils,
             IMapper mapper)
@@ -42,7 +41,7 @@ namespace mysqltest.Services
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model)
         {
-            var user = _context.User.SingleOrDefault(x => x.Username == model.Username);
+            var user = _context.Students.SingleOrDefault(x => x.Username == model.Username);
 
             // validate
             if (user == null || !BCryptNet.Verify(model.Password, user.PasswordHash))
@@ -54,9 +53,9 @@ namespace mysqltest.Services
             return response;
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Student> GetAll()
         {
-            return _context.User;
+            return _context.Students;
         }
 
         public User GetById(int id)
@@ -67,7 +66,7 @@ namespace mysqltest.Services
         public void Register(RegisterRequest model)
         {
             // validate
-            if (_context.User.Any(x => x.Username == model.Username))
+            if (_context.Students.Any(x => x.Username == model.Username))
                 throw new AppException("Username '" + model.Username + "' is already taken");
 
             // map model to new user object
@@ -77,7 +76,7 @@ namespace mysqltest.Services
             user.PasswordHash = BCryptNet.HashPassword(model.Password);
 
             // save user
-            _context.User.Add(user);
+            _context.Students.Add(user);
             _context.SaveChanges();
         }
 
@@ -86,7 +85,7 @@ namespace mysqltest.Services
             var user = getUser(id);
 
             // validate
-            if (model.Username != user.Username && _context.User.Any(x => x.Username == model.Username))
+            if (model.Username != user.Username && _context.Students.Any(x => x.Username == model.Username))
                 throw new AppException("Username '" + model.Username + "' is already taken");
 
             // hash password if it was entered
@@ -95,14 +94,14 @@ namespace mysqltest.Services
 
             // copy model to user and save
             _mapper.Map(model, user);
-            _context.User.Update(user);
+            _context.Students.Update(user);
             _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
             var user = getUser(id);
-            _context.User.Remove(user);
+            _context.Students.Remove(user);
             _context.SaveChanges();
         }
 
@@ -110,9 +109,10 @@ namespace mysqltest.Services
 
         private User getUser(int id)
         {
-            var user = _context.User.Find(id);
+            var user = _context.Students.Find(id);
             if (user == null) throw new KeyNotFoundException("User not found");
             return user;
         }
     }
 }
+*/

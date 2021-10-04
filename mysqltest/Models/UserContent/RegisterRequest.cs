@@ -5,10 +5,10 @@ namespace mysqltest.Models.Users
     public class RegisterRequest
     {
         [Required]
-        public Student FirstName { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
-        public Student LastName { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         public string Username { get; set; }
