@@ -36,6 +36,9 @@ namespace ClubsCore.Controllers
             if (queryParameters.Type != null)
                 clubsQuery = clubsQuery.Where(x => queryParameters.Type.Contains(x.Type));
 
+            if (queryParameters.Status != null)
+                clubsQuery = clubsQuery.Where(s => queryParameters.Status.Contains(s.Status));
+
             var clubs = Paginate<ClubTmpDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
 
             return Ok(clubs);

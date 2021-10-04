@@ -52,7 +52,7 @@ namespace mysqltest
             {
                 app.UseDeveloperExceptionPage();
 
-                //clubsContext.Database.EnsureDeleted();
+                clubsContext.Database.EnsureDeleted();
                 clubsContext.Database.EnsureCreated();
                 DatabaseInitializer.InitializeIfNeeded(clubsContext);
             }

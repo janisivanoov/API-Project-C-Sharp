@@ -1,4 +1,5 @@
-﻿using mysqltest.Enums;
+﻿using mysqltest.Enumeration;
+using mysqltest.Enums;
 
 namespace mysqltest.Mapping.DTO
 {
@@ -7,5 +8,7 @@ namespace mysqltest.Mapping.DTO
         public int Id { get; set; }
         public string Name { get; set; }
         public ClubType Type { get; set; }
+        public int StudentCount { get; set; }
+        public ClubStatus Status { get; set; }
     }
 }
