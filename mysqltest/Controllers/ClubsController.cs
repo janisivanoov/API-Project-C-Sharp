@@ -31,13 +31,13 @@ namespace ClubsCore.Controllers
                                      .AsQueryable(); //To apply filters
             //Applying filters:
             if (queryParameters.Name != null)
-                clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the student Name in context if entered
+                clubsQuery = clubsQuery.Where(n => n.Name.Contains(queryParameters.Name)); //Checking for the club Name in context if entered
 
             if (queryParameters.Type != null)
-                clubsQuery = clubsQuery.Where(x => queryParameters.Type.Contains(x.Type));
+                clubsQuery = clubsQuery.Where(x => queryParameters.Type.Contains(x.Type)); //Checking for the club Type in context if entered
 
             if (queryParameters.Status != null)
-                clubsQuery = clubsQuery.Where(s => queryParameters.Status.Contains(s.Status));
+                clubsQuery = clubsQuery.Where(s => queryParameters.Status.Contains(s.Status)); //Chacking for the club Status in context if entered
 
             var clubs = Paginate<ClubTmpDTO>(clubsQuery, queryParameters); //Using Paginate with Parameters we have already set
 
