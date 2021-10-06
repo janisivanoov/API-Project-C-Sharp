@@ -10,6 +10,7 @@ namespace mysqltest.Mapping
             {
                 cfg.AddProfile<ClubProfile>();
                 cfg.AddProfile<StudentProfile>();
+                cfg.AddProfile<VaccinateProfile>();
             });
 
             return config.CreateMapper();

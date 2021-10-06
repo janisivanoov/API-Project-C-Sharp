@@ -15,6 +15,7 @@ namespace mysqltest.Models.Helpers
             InsertStudents(context);
             InsertStudentClubs(context);
             InsertLoginUp(context);
+            InsertVaccinated(context);
 
             context.SaveChanges();
         }
@@ -60,6 +61,12 @@ namespace mysqltest.Models.Helpers
             context.Add(new Club() { Id = 2, Name = "Math", Type = ClubType.Academic, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
             context.Add(new Club() { Id = 3, Name = "Diving", Type = ClubType.Sport, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
             context.Add(new Club() { Id = 4, Name = "Strollers", Type = ClubType.Leisure, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
+        }
+
+        private static void InsertVaccinated(ClubsContext context)
+        {
+            context.Add(new VaccinatedUser() { Id = 1, FirstName = "Ivan", LastName = "Ivanou", Date_Of_Birth = new DateTime(2004, 8, 12), Id_Card_Number = 123456789, PhoneNumber = 99633191, VaccinatedStatus = Enumeration.VaccinatedStatus.Vaccinated, vaccinatedType = Enumeration.VaccineType.Pfizer });
+            context.Add(new VaccinatedUser() { Id = 2, FirstName = "Ali", LastName = "Tayari", Date_Of_Birth = new DateTime(1999, 8, 1), Id_Card_Number = 987654321, PhoneNumber = 19133699, VaccinatedStatus = Enumeration.VaccinatedStatus.First_dose, vaccinatedType = Enumeration.VaccineType.Moderna });
         }
     }
 }
