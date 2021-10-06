@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using mysqltest.Helpers;
+using mysqltest.Models;
 using mysqltest.Models.Users;
 using mysqltest.Services;
 
@@ -16,6 +17,7 @@ namespace mysqltest.Controllers
         private IStudentService _userService;
         private IMapper _mapper;
         private readonly AppSettings _appSettings;
+        private ClubsContext _context;
 
         public UsersController(
             IStudentService userService,
@@ -25,6 +27,13 @@ namespace mysqltest.Controllers
             _userService = userService;
             _mapper = mapper;
             _appSettings = appSettings.Value;
+        }
+
+        [HttpGet]
+        public ActionResult GettingAll()
+        {
+            var all_users_search = _userService.GettingAll();
+            return Ok(all_users_search);
         }
 
         [AllowAnonymous]
@@ -43,12 +52,14 @@ namespace mysqltest.Controllers
             return Ok(new { message = "Registration successful" });
         }
 
+        /*
         [HttpGet]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
             return Ok(users);
         }
+        */
 
         [HttpGet("{id}")]
         public IActionResult GetById(int id)

@@ -15,6 +15,8 @@ namespace mysqltest.Services
 
         IEnumerable<User> GetAll();
 
+        IEnumerable<User> GettingAll();
+
         User GetById(int id);
 
         void Register(RegisterRequest model);
@@ -57,6 +59,12 @@ namespace mysqltest.Services
         public IEnumerable<User> GetAll()
         {
             return _context.User;
+        }
+
+        public IEnumerable<User> GettingAll()
+        {
+            var user_return = _context.User.OrderBy(c => c.Id);
+            return user_return;
         }
 
         public User GetById(int id)

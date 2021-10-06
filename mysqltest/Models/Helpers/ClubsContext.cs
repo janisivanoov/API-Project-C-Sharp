@@ -20,17 +20,17 @@ namespace mysqltest.Models
                 new Club() { Id = 4, Name = "Strollers", Type = ClubType.Leisure, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Status = Enumeration.ClubStatus.Active });
 
             modelBuilder.Entity<Student>().HasData(
-          new Student() { Id = 1, FirstName = "Ali", LastName = "Tayari", BirthDate = new DateTime(1999, 8, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-          new Student() { Id = 2, FirstName = "Dmitry", LastName = "Apraksin", BirthDate = new DateTime(1963, 8, 9), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-          new Student() { Id = 3, FirstName = "Ivan", LastName = "Ivanou", BirthDate = new DateTime(2004, 8, 12), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-          new Student() { Id = 4, FirstName = "Petr", LastName = "Petrov", BirthDate = new DateTime(2000, 1, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-          new Student() { Id = 5, FirstName = "Sidor", LastName = "Sidorov", BirthDate = new DateTime(1989, 2, 3), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-          new Student() { Id = 6, FirstName = "Pambos", LastName = "Boss", BirthDate = new DateTime(2000, 5, 10), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-          new Student() { Id = 7, FirstName = "Christos", LastName = "Christou", BirthDate = new DateTime(1998, 4, 5), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
-          new Student() { Id = 8, FirstName = "Savvas", LastName = "Savvou", BirthDate = new DateTime(1999, 12, 21), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now }
+                new Student() { Id = 1, FirstName = "Ali", LastName = "Tayari", BirthDate = new DateTime(1999, 8, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Student() { Id = 2, FirstName = "Dmitry", LastName = "Apraksin", BirthDate = new DateTime(1963, 8, 9), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Student() { Id = 3, FirstName = "Ivan", LastName = "Ivanou", BirthDate = new DateTime(2004, 8, 12), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Student() { Id = 4, FirstName = "Petr", LastName = "Petrov", BirthDate = new DateTime(2000, 1, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Student() { Id = 5, FirstName = "Sidor", LastName = "Sidorov", BirthDate = new DateTime(1989, 2, 3), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Student() { Id = 6, FirstName = "Pambos", LastName = "Boss", BirthDate = new DateTime(2000, 5, 10), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Student() { Id = 7, FirstName = "Christos", LastName = "Christou", BirthDate = new DateTime(1998, 4, 5), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new Student() { Id = 8, FirstName = "Savvas", LastName = "Savvou", BirthDate = new DateTime(1999, 12, 21), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now }
           );
             modelBuilder.Entity<StudentClub>().HasData(
-                 new StudentClub() { Id = 1, ClubId = 1, StudentId = 1 },
+                new StudentClub() { Id = 1, ClubId = 1, StudentId = 1 },
                 new StudentClub() { Id = 2, ClubId = 2, StudentId = 1 },
                 new StudentClub() { Id = 3, ClubId = 3, StudentId = 2 },
                 new StudentClub() { Id = 4, ClubId = 4, StudentId = 3 },
