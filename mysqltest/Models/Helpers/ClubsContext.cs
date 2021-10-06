@@ -44,6 +44,9 @@ namespace mysqltest.Models
                 new StudentClub() { Id = 12, ClubId = 2, StudentId = 6 },
                 new StudentClub() { Id = 13, ClubId = 1, StudentId = 7 }
                 );
+            modelBuilder.Entity<User>().HasData(
+                new User() { FirstName = "Ali", LastName = "Tayari", Id = 1, PasswordHash = "12345", Username = "tester", Password = "12345" },
+                new User() { FirstName = "Ivan", LastName = "Ivanov", Id = 2, PasswordHash = "12345", Username = "tester_2", Password = "12345" });
         }
 
         public DbSet<Club> Clubs { get; set; }

@@ -5,11 +5,14 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using mysqltest.Core.Providers;
+using mysqltest.Helpers;
 using mysqltest.Mapping;
 using mysqltest.Models;
 using mysqltest.Models.Helpers;
+using mysqltest.Services;
 using System;
 using System.Text.Json.Serialization;
+using WebApi.Authorization;
 
 namespace mysqltest
 {
@@ -44,6 +47,9 @@ namespace mysqltest
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
             services.AddSwaggerGen();
+            services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddScoped<IStudentService, UserService>();
+            services.AddCors();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ClubsContext clubsContext)
@@ -53,7 +59,7 @@ namespace mysqltest
                 app.UseDeveloperExceptionPage();
 
                 //clubsContext.Database.EnsureDeleted();
-                clubsContext.Database.EnsureCreated();
+                //clubsContext.Database.EnsureCreated();
                 DatabaseInitializer.InitializeIfNeeded(clubsContext);
             }
 
@@ -77,6 +83,20 @@ namespace mysqltest
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+
+            app.UseRouting();
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            // global error handler
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            // custom jwt auth middleware
+            app.UseMiddleware<JwtMiddleware>();
         }
     }
 }
