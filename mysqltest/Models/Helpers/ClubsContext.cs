@@ -11,6 +11,10 @@ namespace mysqltest.Models
         {
         }
 
+        //TODO: THINK IF ITS NEEDED
+        //TODO: THINK IF ITS NEEDED
+        //TODO: THINK IF ITS NEEDED
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Club>().HasData(
