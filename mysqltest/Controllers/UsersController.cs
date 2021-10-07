@@ -52,15 +52,6 @@ namespace mysqltest.Controllers
             return Ok(new { message = "Registration successful" });
         }
 
-        /*
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _userService.GetAll();
-            return Ok(users);
-        }
-        */
-
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
