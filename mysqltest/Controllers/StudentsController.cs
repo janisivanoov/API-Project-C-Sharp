@@ -38,6 +38,9 @@ namespace ClubsCore.Controllers
             if (queryparameters.LastName != null)
                 studentsQuery = studentsQuery.Where(l => l.LastName == queryparameters.LastName); //Checking if the entered LastName is in the context if LastName entered
 
+            if (queryparameters.Type != null)
+                studentsQuery = studentsQuery.Where(t => queryparameters.Type.Contains(t.Type)); //Checking for the club Type in context if entered
+
             var students = Paginate<StudentDTO>(studentsQuery, queryparameters); //using Paginate with Parameters we have alredy set
 
             return Ok(students);

@@ -31,10 +31,10 @@ namespace mysqltest.Controllers
             //Applying filters:
 
             if (queryparameters.Status != null)
-                vaccin_userQuery = vaccin_userQuery.Where(s => queryparameters.Status.Contains(s.VaccinatedStatus));
+                vaccin_userQuery = vaccin_userQuery.Where(s => queryparameters.Status.Contains(s.VaccinatedStatus)); //If status unequals to null return it
 
             if (queryparameters.Type != null)
-                vaccin_userQuery = vaccin_userQuery.Where(t => queryparameters.Type.Contains(t.VaccinatedType));
+                vaccin_userQuery = vaccin_userQuery.Where(t => queryparameters.Type.Contains(t.VaccinatedType)); //If type unequals to null return it
 
             var students = Paginate<VaccinatedDTO>(vaccin_userQuery, queryparameters); //using Paginate with Parameters we have alredy set
 
@@ -60,9 +60,9 @@ namespace mysqltest.Controllers
         [HttpPost]
         public async Task<ActionResult<VaccinatedUser>> PostVaccinatedUser([FromBody] VaccinatedUser vaccinatedUser, long id)
         {
-            _context.VaccinatedUsers.Add(vaccinatedUser);
+            _context.VaccinatedUsers.Add(vaccinatedUser); //Using Add method to add vaccinated person
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); //Saving added student
 
             return Ok(vaccinatedUser);
         }
@@ -71,14 +71,14 @@ namespace mysqltest.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<VaccinatedUser>> DeleteVaccinatedUser(long id)
         {
-            var vaccinatedUser = await _context.VaccinatedUsers.FindAsync(id);
+            var vaccinatedUser = await _context.VaccinatedUsers.FindAsync(id); //Looking for a person
 
             if (vaccinatedUser == null)
                 return NotFound();
 
-            _context.VaccinatedUsers.Remove(vaccinatedUser);
+            _context.VaccinatedUsers.Remove(vaccinatedUser); //Using remove method to delete it
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync(); //Saving changes
 
             return vaccinatedUser;
         }

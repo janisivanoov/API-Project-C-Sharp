@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mysqltest.Enumeration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,5 +17,7 @@ namespace mysqltest.Models
         public DateTime BirthDate { get; set; }
 
         public ICollection<StudentClub> Clubs { get; set; }
+
+        public StudentType Type { get; set; }
     }
 }

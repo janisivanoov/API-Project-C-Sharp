@@ -45,14 +45,14 @@ namespace mysqltest.Models.Helpers
 
         private static void InsertStudents(ClubsContext context)
         {
-            context.Add(new Student() { Id = 1, FirstName = "Ali", LastName = "Tayari", BirthDate = new DateTime(1999, 8, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
+            context.Add(new Student() { Id = 1, FirstName = "Ali", LastName = "Tayari", BirthDate = new DateTime(1999, 8, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Type = Enumeration.StudentType.Active });
             context.Add(new Student() { Id = 2, FirstName = "Dmitry", LastName = "Apraksin", BirthDate = new DateTime(1963, 8, 9), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
-            context.Add(new Student() { Id = 3, FirstName = "Ivan", LastName = "Ivanou", BirthDate = new DateTime(2004, 8, 12), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
-            context.Add(new Student() { Id = 4, FirstName = "Petr", LastName = "Petrov", BirthDate = new DateTime(2000, 1, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
-            context.Add(new Student() { Id = 5, FirstName = "Sidor", LastName = "Sidorov", BirthDate = new DateTime(1989, 2, 3), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
-            context.Add(new Student() { Id = 6, FirstName = "Pambos", LastName = "Boss", BirthDate = new DateTime(2000, 5, 10), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
-            context.Add(new Student() { Id = 7, FirstName = "Christos", LastName = "Christou", BirthDate = new DateTime(1998, 4, 5), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
-            context.Add(new Student() { Id = 8, FirstName = "Savvas", LastName = "Savvou", BirthDate = new DateTime(1999, 12, 21), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
+            context.Add(new Student() { Id = 3, FirstName = "Ivan", LastName = "Ivanou", BirthDate = new DateTime(2004, 8, 12), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Type = Enumeration.StudentType.Active });
+            context.Add(new Student() { Id = 4, FirstName = "Petr", LastName = "Petrov", BirthDate = new DateTime(2000, 1, 1), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Type = Enumeration.StudentType.NoAnswer });
+            context.Add(new Student() { Id = 5, FirstName = "Sidor", LastName = "Sidorov", BirthDate = new DateTime(1989, 2, 3), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Type = Enumeration.StudentType.Active });
+            context.Add(new Student() { Id = 6, FirstName = "Pambos", LastName = "Boss", BirthDate = new DateTime(2000, 5, 10), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Type = Enumeration.StudentType.NoAnswer });
+            context.Add(new Student() { Id = 7, FirstName = "Christos", LastName = "Christou", BirthDate = new DateTime(1998, 4, 5), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Type = Enumeration.StudentType.InActive });
+            context.Add(new Student() { Id = 8, FirstName = "Savvas", LastName = "Savvou", BirthDate = new DateTime(1999, 12, 21), CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Type = Enumeration.StudentType.InActive });
         }
 
         private static void InsertClubs(ClubsContext context)

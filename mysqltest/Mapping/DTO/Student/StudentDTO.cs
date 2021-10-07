@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mysqltest.Enumeration;
+using System;
 
 namespace mysqltest.Mapping.DTO
 {
@@ -9,5 +10,6 @@ namespace mysqltest.Mapping.DTO
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
         public int ClubCount { get; set; }
+        public StudentType Type { get; set; }
     }
 }
