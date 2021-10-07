@@ -48,8 +48,8 @@ namespace mysqltest.Models
                 new User() { FirstName = "Ali", LastName = "Tayari", Id = 1, PasswordHash = "12345", Username = "tester", Password = "12345" },
                 new User() { FirstName = "Ivan", LastName = "Ivanov", Id = 2, PasswordHash = "12345", Username = "tester_2", Password = "12345" });
             modelBuilder.Entity<VaccinatedUser>().HasData(
-                new VaccinatedUser() { Id = 1, FirstName = "Ivan", LastName = "Ivanou", Date_Of_Birth = new DateTime(2004, 8, 12), Id_Card_Number = 123456789, PhoneNumber = 99633191, VaccinatedStatus = Enumeration.VaccinatedStatus.Vaccinated, vaccinatedType = Enumeration.VaccineType.Pfizer },
-                new VaccinatedUser() { Id = 2, FirstName = "Ali", LastName = "Tayari", Date_Of_Birth = new DateTime(1999, 8, 1), Id_Card_Number = 987654321, PhoneNumber = 19133699, VaccinatedStatus = Enumeration.VaccinatedStatus.First_dose, vaccinatedType = Enumeration.VaccineType.Moderna });
+                new VaccinatedUser() { Id = 1, FirstName = "Ivan", LastName = "Ivanou", Date_Of_Birth = new DateTime(2004, 8, 12), Id_Card_Number = 123456789, PhoneNumber = 99633191, VaccinatedStatus = Enumeration.VaccinatedStatus.Vaccinated, VaccinatedType = Enumeration.VaccineType.Pfizer, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now },
+                new VaccinatedUser() { Id = 2, FirstName = "Ali", LastName = "Tayari", Date_Of_Birth = new DateTime(1999, 8, 1), Id_Card_Number = 987654321, PhoneNumber = 19133699, VaccinatedStatus = Enumeration.VaccinatedStatus.First_dose, VaccinatedType = Enumeration.VaccineType.Moderna, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
         }
 
         public DbSet<Club> Clubs { get; set; }

@@ -6,7 +6,7 @@ namespace mysqltest.Mapping.DTO
     {
         public long Id { get; set; }
         public string FirstName { get; set; }
-        public VaccineType vaccinatedType { get; set; }
+        public VaccineType VaccinatedType { get; set; }
         public VaccinatedStatus VaccinatedStatus { get; set; }
     }
 }

@@ -71,7 +71,7 @@ namespace ClubsCore.Controllers
 
             await _context.SaveChangesAsync(); //saving edit in a database
 
-            return CreatedAtRoute("Post", new { Id = studentPost.Id }, studentPost);
+            return Ok(studentPost);
         }
 
         /// <summary>

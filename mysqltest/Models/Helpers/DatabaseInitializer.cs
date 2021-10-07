@@ -65,8 +65,8 @@ namespace mysqltest.Models.Helpers
 
         private static void InsertVaccinated(ClubsContext context)
         {
-            context.Add(new VaccinatedUser() { Id = 1, FirstName = "Ivan", LastName = "Ivanou", Date_Of_Birth = new DateTime(2004, 8, 12), Id_Card_Number = 123456789, PhoneNumber = 99633191, VaccinatedStatus = Enumeration.VaccinatedStatus.Vaccinated, vaccinatedType = Enumeration.VaccineType.Pfizer });
-            context.Add(new VaccinatedUser() { Id = 2, FirstName = "Ali", LastName = "Tayari", Date_Of_Birth = new DateTime(1999, 8, 1), Id_Card_Number = 987654321, PhoneNumber = 19133699, VaccinatedStatus = Enumeration.VaccinatedStatus.First_dose, vaccinatedType = Enumeration.VaccineType.Moderna });
+            context.Add(new VaccinatedUser() { Id = 1, FirstName = "Ivan", LastName = "Ivanou", Date_Of_Birth = new DateTime(2004, 8, 12), Id_Card_Number = 123456789, PhoneNumber = 99633191, VaccinatedStatus = Enumeration.VaccinatedStatus.Vaccinated, VaccinatedType = Enumeration.VaccineType.Pfizer, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
+            context.Add(new VaccinatedUser() { Id = 2, FirstName = "Ali", LastName = "Tayari", Date_Of_Birth = new DateTime(1999, 8, 1), Id_Card_Number = 987654321, PhoneNumber = 19133699, VaccinatedStatus = Enumeration.VaccinatedStatus.First_dose, VaccinatedType = Enumeration.VaccineType.Moderna, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now });
         }
     }
 }

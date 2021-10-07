@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using mysqltest.Mapping.DTO;
 using mysqltest.Models;
 using mysqltest.Paging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,7 +22,7 @@ namespace mysqltest.Controllers
 
         // GET
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<VaccinatedUser>>> GetVaccinatedUsers([FromQuery] QueryVaccinatedParameters queryparameters)
+        public ActionResult<IEnumerable<VaccinatedUser>> GetVaccinatedUsers([FromQuery] QueryVaccinatedParameters queryparameters)
         {
             var vaccin_userQuery = _context.VaccinatedUsers
                                      .OrderBy(c => c.Id) //ordering all students by Id
@@ -31,7 +34,7 @@ namespace mysqltest.Controllers
                 vaccin_userQuery = vaccin_userQuery.Where(s => queryparameters.Status.Contains(s.VaccinatedStatus));
 
             if (queryparameters.Type != null)
-                vaccin_userQuery = vaccin_userQuery.Where(t => queryparameters.Type.Contains(t.vaccinatedType));
+                vaccin_userQuery = vaccin_userQuery.Where(t => queryparameters.Type.Contains(t.VaccinatedType));
 
             var students = Paginate<VaccinatedDTO>(vaccin_userQuery, queryparameters); //using Paginate with Parameters we have alredy set
 
@@ -40,7 +43,7 @@ namespace mysqltest.Controllers
 
         // GET
         [HttpGet("{id}")]
-        public async Task<ActionResult<VaccinatedUser>> GetVaccinatedUser(long id)
+        public ActionResult<VaccinatedUser> GetVaccinatedUser(long id)
         {
             var vaccin_user = _context.Students
                                .Where(x => x.Id == id) //searching for Student using Id
@@ -53,26 +56,15 @@ namespace mysqltest.Controllers
             return Ok(vaccin_user);
         }
 
-        // PUT
-        [HttpPut("{id}")]
-        public async Task<ActionResult> PutVaccinatedUser(VaccinatedUser vaccinated)
-        {
-            var post_vaccinated = _context.VaccinatedUsers.Add(vaccinated);
-
-            await _context.SaveChangesAsync();
-
-            return CreatedAtRoute("Post", new { Id = vaccinated.Id }, vaccinated);
-        }
-
         // POST
         [HttpPost]
-        public async Task<ActionResult<VaccinatedUser>> PostVaccinatedUser(VaccinatedUser vaccinatedUser)
+        public async Task<ActionResult<VaccinatedUser>> PostVaccinatedUser([FromBody] VaccinatedUser vaccinatedUser, long id)
         {
             _context.VaccinatedUsers.Add(vaccinatedUser);
 
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetVaccinatedUser", new { id = vaccinatedUser.Id }, vaccinatedUser);
+            return Ok(vaccinatedUser);
         }
 
         // DELETE
@@ -89,6 +81,32 @@ namespace mysqltest.Controllers
             await _context.SaveChangesAsync();
 
             return vaccinatedUser;
+        }
+
+        //Patch
+        [HttpPatch("{id}")]
+        public ActionResult Patch(int id, [FromBody] JsonPatchDocument<VaccinatedUser> value)
+        {
+            try
+            {
+                var result = _context.VaccinatedUsers.FirstOrDefault(n => n.Id == id); //Getting Club by Id
+
+                if (result == null)
+                    return NotFound();
+
+                value.ApplyTo(result, (Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState); //result gets the values from the patch request
+
+                _context.SaveChanges(); //Saving in database
+
+                if (false == ModelState.IsValid)
+                    return BadRequest();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex); //Catching exceptions
+            }
         }
     }
 }

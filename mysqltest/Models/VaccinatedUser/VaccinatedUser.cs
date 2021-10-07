@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace mysqltest.Models
 {
-    public class VaccinatedUser
+    public class VaccinatedUser : BaseEntity
     {
         public long Id { get; set; }
 
@@ -20,7 +20,7 @@ namespace mysqltest.Models
 
         public DateTime Date_Of_Birth { get; set; }
 
-        public VaccineType vaccinatedType { get; set; }
+        public VaccineType VaccinatedType { get; set; }
         public VaccinatedStatus VaccinatedStatus { get; set; }
     }
 }
