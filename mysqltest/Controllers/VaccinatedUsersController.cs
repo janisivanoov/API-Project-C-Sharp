@@ -7,7 +7,6 @@ using mysqltest.Mapping.DTO;
 using mysqltest.Models;
 using mysqltest.Paging;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +21,7 @@ namespace mysqltest.Controllers
 
         // GET
         [HttpGet]
-        public ActionResult<IEnumerable<VaccinatedUser>> GetVaccinatedUsers([FromQuery] QueryVaccinatedParameters queryparameters)
+        public ActionResult GetVaccinatedUsers([FromQuery] QueryVaccinatedParameters queryparameters)
         {
             var vaccin_userQuery = _context.VaccinatedUsers
                                      .OrderBy(c => c.Id) //ordering all students by Id
@@ -43,9 +42,9 @@ namespace mysqltest.Controllers
 
         // GET
         [HttpGet("{id}")]
-        public ActionResult<VaccinatedUser> GetVaccinatedUser(long id)
+        public ActionResult GetVaccinatedUser(long id)
         {
-            var vaccin_user = _context.Students
+            var vaccin_user = _context.VaccinatedUsers
                                .Where(x => x.Id == id) //searching for Student using Id
                                .ProjectTo<VaccinatedDTO>(_mapper.ConfigurationProvider) //using mapper and StudentDTO
                                .FirstOrDefault(); //Selecting the club by Id with StudentDTO parameters or make it as a default
@@ -58,7 +57,7 @@ namespace mysqltest.Controllers
 
         // POST
         [HttpPost]
-        public async Task<ActionResult<VaccinatedUser>> PostVaccinatedUser([FromBody] VaccinatedUser vaccinatedUser, long id)
+        public async Task<ActionResult> PostVaccinatedUser([FromBody] VaccinatedUser vaccinatedUser)
         {
             _context.VaccinatedUsers.Add(vaccinatedUser); //Using Add method to add vaccinated person
 
