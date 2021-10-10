@@ -35,9 +35,9 @@ namespace mysqltest.Controllers
             if (queryparameters.Type != null)
                 vaccin_userQuery = vaccin_userQuery.Where(t => queryparameters.Type.Contains(t.VaccinatedType)); //If type unequals to null return it
 
-            var students = Paginate<VaccinatedDTO>(vaccin_userQuery, queryparameters); //using Paginate with Parameters we have alredy set
+            var vaccin_user = Paginate<VaccinatedDTO>(vaccin_userQuery, queryparameters); //using Paginate with Parameters we have alredy set
 
-            return Ok(students);
+            return Ok(vaccin_user);
         }
 
         // GET
