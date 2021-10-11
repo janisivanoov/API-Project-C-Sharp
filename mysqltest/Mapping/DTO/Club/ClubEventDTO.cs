@@ -3,7 +3,7 @@ using mysqltest.Enums;
 using mysqltest.Models;
 using System;
 
-namespace mysqltest.Mapping.DTO
+namespace mysqltest.Mapping
 {
     public class ClubEventDTO
     {
@@ -22,5 +22,7 @@ namespace mysqltest.Mapping.DTO
         public ClubStatus Status { get; set; }
 
         public int StudentCount { get; set; }
+
+        public ClubEventStatus EventStatus { get; set; }
     }
 }

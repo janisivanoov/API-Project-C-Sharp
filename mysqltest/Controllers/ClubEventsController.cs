@@ -1,107 +1,110 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
+using mysqltest.Mapping;
+using mysqltest.Mapping.DTO;
 using mysqltest.Models;
-using System.Collections.Generic;
+using mysqltest.Paging;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace mysqltest.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ClubEventsController : ControllerBase
+    public class ClubEventsController : ApiControllerBase
     {
-        private readonly ClubsContext _context;
-
-        public ClubEventsController(ClubsContext context)
+        public ClubEventsController(ClubsContext context, IMapper mapper)
+            : base(context, mapper)
         {
-            _context = context;
         }
 
-        // GET: api/ClubEvents
+        // GET
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ClubEvent>>> GetClubEvent()
+        public ActionResult GetClubEvent(long id, [FromQuery] QueryClubEventParameters queryParameters)
         {
-            return await _context.ClubEvent.ToListAsync();
+            var clubseventQuery = _context.ClubEvent
+                                      .OrderBy(c => c.Id)
+                                      .AsQueryable();
+            //Applying filters:
+            if (queryParameters.Name != null)
+                clubseventQuery = clubseventQuery.Where(n => n.Name.Contains(queryParameters.Name));
+
+            if (queryParameters.Type != null)
+                clubseventQuery = clubseventQuery.Where(x => queryParameters.Type.Contains(x.Type));
+
+            if (queryParameters.EventStatus != null)
+                clubseventQuery = clubseventQuery.Where(s => queryParameters.EventStatus.Contains(s.EventStatus));
+
+            var clubEvent = Paginate<ClubTmpDTO>(clubseventQuery, queryParameters);
+
+            return Ok(clubEvent);
         }
 
-        // GET: api/ClubEvents/5
+        // GET
         [HttpGet("{id}")]
-        public async Task<ActionResult<ClubEvent>> GetClubEvent(int id)
+        public ActionResult GetClubEvent(int id)
         {
-            var clubEvent = await _context.ClubEvent.FindAsync(id);
+            var clubEvent = _context.ClubEvent.Where(x => x.Id == id).ProjectTo<ClubEventDTO>(_mapper.ConfigurationProvider).FirstOrDefault();
 
             if (clubEvent == null)
-            {
                 return NotFound();
-            }
 
-            return clubEvent;
+            return Ok(clubEvent);
         }
 
-        // PUT: api/ClubEvents/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutClubEvent(int id, ClubEvent clubEvent)
-        {
-            if (id != clubEvent.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(clubEvent).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ClubEventExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/ClubEvents
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // POST
         [HttpPost]
-        public async Task<ActionResult<ClubEvent>> PostClubEvent(ClubEvent clubEvent)
+        public async Task<ActionResult> PostClubEvent(ClubEvent clubEvent)
         {
-            _context.ClubEvent.Add(clubEvent);
+            var post_event = _context.ClubEvent.Add(clubEvent);
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetClubEvent", new { id = clubEvent.Id }, clubEvent);
+            return Ok(clubEvent);
         }
 
-        // DELETE: api/ClubEvents/5
+        // DELETE
         [HttpDelete("{id}")]
         public async Task<ActionResult<ClubEvent>> DeleteClubEvent(int id)
         {
-            var clubEvent = await _context.ClubEvent.FindAsync(id);
-            if (clubEvent == null)
-            {
+            var clubEv = await _context.ClubEvent
+                                      .FindAsync(id);
+            if (clubEv == null)
                 return NotFound();
-            }
 
-            _context.ClubEvent.Remove(clubEvent);
+            _context.ClubEvent.Remove(clubEv);
+
             await _context.SaveChangesAsync();
 
-            return clubEvent;
+            return clubEv;
         }
 
-        private bool ClubEventExists(int id)
+        //TODO
+        [HttpPatch("{id}")]
+        public ActionResult Patch(long id, [FromBody] JsonPatchDocument<ClubEvent> value)
         {
-            return _context.ClubEvent.Any(e => e.Id == id);
+            try
+            {
+                var result = _context.ClubEvent.FirstOrDefault(n => n.Id == id);
+
+                if (result == null)
+                    return NotFound();
+
+                value.ApplyTo(result, (Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter)ModelState);
+
+                _context.SaveChanges();
+
+                if (false == ModelState.IsValid)
+                    return BadRequest();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex);
+            }
         }
     }
 }

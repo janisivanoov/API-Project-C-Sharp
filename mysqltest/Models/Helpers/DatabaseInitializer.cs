@@ -16,8 +16,14 @@ namespace mysqltest.Models.Helpers
             InsertStudentClubs(context);
             InsertLoginUp(context);
             InsertVaccinated(context);
+            InsertClubEvent(context);
 
             context.SaveChanges();
+        }
+
+        private static void InsertClubEvent(ClubsContext context)
+        {
+            context.Add(new ClubEvent() { Name = "First Event", Id = 1, CreatedDate = DateTime.Now, UpdatedDate = DateTime.Now, Beggining = new DateTime(2021, 10, 9), Ending = new DateTime(2022, 10, 9), EventStatus = Enumeration.ClubEventStatus.Will_be, Status = Enumeration.ClubStatus.Active, Type = Enumeration.ClubEventType.Active });
         }
 
         private static void InsertLoginUp(ClubsContext context)

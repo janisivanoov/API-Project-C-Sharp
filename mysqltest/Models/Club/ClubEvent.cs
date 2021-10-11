@@ -1,14 +1,11 @@
 ﻿using mysqltest.Enumeration;
-using mysqltest.Enums;
 using System;
 using System.Collections.Generic;
 
 namespace mysqltest.Models
 {
-    public class ClubEvent
+    public class ClubEvent : BaseEntity
     {
-        public Club Club { get; set; }
-
         public string Name { get; set; }
 
         public int Id { get; set; }
@@ -17,10 +14,12 @@ namespace mysqltest.Models
 
         public DateTime Ending { get; set; }
 
-        public ClubType Type { get; set; }
+        public ClubEventType Type { get; set; }
 
         public ClubStatus Status { get; set; }
 
         public ICollection<StudentClub> Students { get; set; }
+
+        public ClubEventStatus EventStatus { get; set; }
     }
 }
