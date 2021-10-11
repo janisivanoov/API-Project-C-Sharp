@@ -14,5 +14,6 @@ namespace mysqltest.Models
         public DbSet<StudentClub> StudentClubs { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<VaccinatedUser> VaccinatedUsers { get; set; }
+        public DbSet<mysqltest.Models.ClubEvent> ClubEvent { get; set; }
     }
 }

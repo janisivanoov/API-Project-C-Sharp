@@ -24,7 +24,7 @@ namespace mysqltest.Controllers
         public ActionResult GetVaccinatedUsers([FromQuery] QueryVaccinatedParameters queryparameters)
         {
             var vaccin_userQuery = _context.VaccinatedUsers
-                                     .OrderBy(c => c.Id) //ordering all students by Id
+                                     .OrderBy(c => c.Id) //ordering all users by Id
                                      .AsQueryable(); //To apply filters
 
             //Applying filters:
@@ -45,9 +45,9 @@ namespace mysqltest.Controllers
         public ActionResult GetVaccinatedUser(long id)
         {
             var vaccin_user = _context.VaccinatedUsers
-                               .Where(x => x.Id == id) //searching for Student using Id
+                               .Where(x => x.Id == id) //searching for user using Id
                                .ProjectTo<VaccinatedDTO>(_mapper.ConfigurationProvider) //using mapper and StudentDTO
-                               .FirstOrDefault(); //Selecting the club by Id with StudentDTO parameters or make it as a default
+                               .FirstOrDefault(); //Selecting the user by Id with VaccinatedDTO parameters or make it as a default
 
             if (vaccin_user == null)
                 return NotFound();
@@ -61,7 +61,7 @@ namespace mysqltest.Controllers
         {
             _context.VaccinatedUsers.Add(vaccinatedUser); //Using Add method to add vaccinated person
 
-            await _context.SaveChangesAsync(); //Saving added student
+            await _context.SaveChangesAsync(); //Saving added user
 
             return Ok(vaccinatedUser);
         }
@@ -88,7 +88,7 @@ namespace mysqltest.Controllers
         {
             try
             {
-                var result = _context.VaccinatedUsers.FirstOrDefault(n => n.Id == id); //Getting Club by Id
+                var result = _context.VaccinatedUsers.FirstOrDefault(n => n.Id == id); //Getting user by Id
 
                 if (result == null)
                     return NotFound();
