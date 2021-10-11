@@ -21,7 +21,7 @@ namespace mysqltest.Controllers
 
         // GET
         [HttpGet]
-        public ActionResult GetClubEvent(long id, [FromQuery] QueryClubEventParameters queryParameters)
+        public ActionResult GetClubEvent([FromQuery] QueryClubEventParameters queryParameters)
         {
             var clubseventQuery = _context.ClubEvent
                                       .OrderBy(c => c.Id)
