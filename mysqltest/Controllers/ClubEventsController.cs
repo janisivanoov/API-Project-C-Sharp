@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using mysqltest.Mapping;
-using mysqltest.Mapping.DTO;
 using mysqltest.Models;
 using mysqltest.Paging;
 using System;
@@ -37,7 +36,7 @@ namespace mysqltest.Controllers
             if (queryParameters.EventStatus != null)
                 clubseventQuery = clubseventQuery.Where(s => queryParameters.EventStatus.Contains(s.EventStatus));
 
-            var clubEvent = Paginate<ClubTmpDTO>(clubseventQuery, queryParameters);
+            var clubEvent = Paginate<ClubEventDTO>(clubseventQuery, queryParameters);
 
             return Ok(clubEvent);
         }

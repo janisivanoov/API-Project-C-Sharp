@@ -1,14 +1,10 @@
 ﻿using mysqltest.Enumeration;
-using mysqltest.Enums;
-using mysqltest.Models;
 using System;
 
 namespace mysqltest.Mapping
 {
     public class ClubEventDTO
     {
-        public Club Club { get; set; }
-
         public string Name { get; set; }
 
         public int Id { get; set; }
@@ -17,9 +13,7 @@ namespace mysqltest.Mapping
 
         public DateTime Ending { get; set; }
 
-        public ClubType Type { get; set; }
-
-        public ClubStatus Status { get; set; }
+        public ClubEventType Type { get; set; }
 
         public int StudentCount { get; set; }
 
