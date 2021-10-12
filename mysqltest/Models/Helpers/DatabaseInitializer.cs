@@ -17,8 +17,14 @@ namespace mysqltest.Models.Helpers
             InsertLoginUp(context);
             InsertVaccinated(context);
             InsertClubEvent(context);
+            InsertEmployee(context);
 
             context.SaveChanges();
+        }
+
+        private static void InsertEmployee(ClubsContext context)
+        {
+            context.Add(new Employee() { FirstName = "Ali", LastName = "Tayari", Id = 1, Status = Enumeration.EmployeeStatus.Active, Type = Enumeration.EmployeeType.Worker });
         }
 
         private static void InsertClubEvent(ClubsContext context)

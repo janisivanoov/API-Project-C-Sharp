@@ -15,8 +15,6 @@ namespace mysqltest.Mapping
 
         public ClubEventType Type { get; set; }
 
-        public int StudentCount { get; set; }
-
         public ClubEventStatus EventStatus { get; set; }
     }
 }

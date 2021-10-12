@@ -1,0 +1,14 @@
+﻿using mysqltest.Enumeration;
+using System.Collections.Generic;
+
+namespace mysqltest.Paging
+{
+    public class QueryEmployeeParameters : PaginationParameters
+    {
+        public string Name { get; set; } //Creating public string Name to use it as a filter
+
+        public List<EmployeeType> Type { get; set; }  //Creating public List to check if it contains Type u enter to use it as a filter
+
+        public List<EmployeeStatus> Status { get; set; } //Creating public List to check if it contains Status u enter to use it as a filter
+    }
+}

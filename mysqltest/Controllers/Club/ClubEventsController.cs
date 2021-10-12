@@ -80,7 +80,7 @@ namespace mysqltest.Controllers
             return clubEv;
         }
 
-        //TODO
+        //Patch
         [HttpPatch("{id}")]
         public ActionResult Patch(long id, [FromBody] JsonPatchDocument<ClubEvent> value)
         {
